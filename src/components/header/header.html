@@ -27,7 +27,63 @@
     .card{
         max-width: 25%;
         border-radius: 8px;
-        border: 1px solid black;
+        border: 1px solid #E0E0E0;
+        background: #FFF;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+        padding: 10px 20px;
+    }
+
+
+    .card .main-info-inner{
+        display: flex;
+        align-items: center;
+        margin-bottom: 14px;
+
+    }
+
+    .card .text-inner{
+        margin-left: 10px;
+    }
+
+    .card h3{
+        color: #7C6141;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+
+        margin-bottom: 14px;
+
+    }
+
+    .card .name{
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .card .was-burn{
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .card .card__info{
+        display: flex;
+        align-items: end;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        margin-bottom: 14px;
+
     }
 
 </style>
@@ -43,12 +99,19 @@
     </header>
 
     <div class="card">
-        <h4>Карточка героя</h4>
-        <div class="card__info">Имя: Жон Батон</div>
-        <div class="card__info">Гендер: женщина</div>
-        <div class="card__info">Гендер: женщина</div>
-        <div class="card__info">Гендер: женщина</div>
-        <div class="card__info">Гендер: женщина</div>
+        <h3>Карточка героя</h3>
+        <div class="main-info-inner">
+            <div class="img-inner">
+                <img src="../../../public/logoPerson.png" alt="">
+            </div>
+            <div class="text-inner">
+                <h4 class="name">Жон Пежон</h4>
+                <h5 class="was-burn">155 b.c.</h5>
+            </div>
+        </div>
+        <div class="card__info">Чикага сити</div>
+        <div class="card__info">100 b.c.</div>
+        <div class="card__info">Омэриканец</div>
     </div>
 </body>
 </html>
