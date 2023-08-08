@@ -1,4 +1,4 @@
-export default class dotClass{
+export default class dotService{
     constructor() {
         this._apiUrl = "https://anapioficeandfire.com/api"
     }
@@ -23,7 +23,9 @@ export default class dotClass{
      * @param id ID персонажа
      * @returns {Promise<*>}
      */
-    getCurrCharacters(id){
+    async getCurrCharacters(id){
+        // const character =  this.get(`/characters/${id}`)
+        // return this._transformChar(character)
         return this.get(`/characters/${id}`)
     }
 
@@ -50,6 +52,16 @@ export default class dotClass{
      */
     getAllBooks(){
         return this.get(`/books`)
+    }
+
+    _transformChar(char){
+        return{
+            name: char.name,
+            gender: char.gender,
+            born: char.born,
+            died: char.died,
+            culture: char.culture
+        }
     }
 }
 

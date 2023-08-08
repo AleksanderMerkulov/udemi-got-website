@@ -1,17 +1,14 @@
 import './App.css';
 import Header from "./components/header/header";
+import RandomChar from "./components/randomChar/randomChar";
 
-import dotClass from "./services/gotDatabaseClass";
 
 function App() {
-
-  const dot = new dotClass()
-
-
 
   return (
     <div className="App">
       <Header></Header>
+      <RandomChar></RandomChar>
     </div>
   );
 }
