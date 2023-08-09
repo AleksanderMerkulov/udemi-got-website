@@ -24,9 +24,8 @@ export default class dotService{
      * @returns {Promise<*>}
      */
     async getCurrCharacters(id){
-        // const character =  this.get(`/characters/${id}`)
-        // return this._transformChar(character)
-        return this.get(`/characters/${id}`)
+        const character = await this.get(`/characters/${id}`)
+        return this._transformChar(character)
     }
 
     /**

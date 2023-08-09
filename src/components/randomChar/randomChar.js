@@ -11,25 +11,11 @@ export default class RandomChar extends Component{
 
     gotService = new gotService()
     state = {
-        char:{
-            name: null,
-            gender: null,
-            born: null,
-            died: null,
-            culture: null
-        }
+        char:{}
     }
 
     onCharLoaded = (char) =>{
-        this.setState({
-            char:{
-                name: char.name,
-                gender: char.gender,
-                born: char.born,
-                died: char.died,
-                culture: char.culture
-            }
-        })
+        this.setState({char})
     }
 
     updateChar(){
