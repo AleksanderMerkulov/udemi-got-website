@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import gotService from '../../services/gotService';
+import Spinner from "../spinner/spinner";
+import ErrorMessage from "../errorMessage/errorMessage";
 
 export default class RandomChar extends Component{
 
@@ -11,11 +13,16 @@ export default class RandomChar extends Component{
 
     gotService = new gotService()
     state = {
-        char:{}
+        char:{},
+        loading: true,
+        error: false,
     }
 
     onCharLoaded = (char) =>{
         this.setState({char})
+        this.setState({
+            loading: false,
+        })
     }
 
     updateChar(){
@@ -24,24 +31,47 @@ export default class RandomChar extends Component{
             .then(this.onCharLoaded)
     }
 
+    onError = (error) =>{
+        this.setState({
+            error: true,
+            loading: false
+        })
+    }
+
     render(){
-        const {char:{name, gender, born, died, culture}} = this.state
+        const {char, loading, error} = this.state
 
         const RandomCharContainer = styled.div`
+          width: 25%;
+          min-height: 200px;
           border: 1px solid black;
         `
 
+        const errorMessage = error ? <ErrorMessage/> : null
+        const spinner = loading ? <Spinner/> : null
+        const content = !(loading || error) ? <View char={char}/> : null
+
         return(
             <RandomCharContainer>
-                <ul>
-                    <li>{name}</li>
-                    <li>{gender}</li>
-                    <li>{born}</li>
-                    {(died !== ""? <li>{died}</li>:"")}
-                    <li>{culture}</li>
-                </ul>
+                {errorMessage}
+                {spinner}
+                {content}
             </RandomCharContainer>
         )
 
     }
+}
+
+const View = ({char}) => {
+    const {name, gender, born, died, culture} = char
+
+    return(
+        <ul>
+            <li>{name}</li>
+            <li>{gender}</li>
+            <li>{born}</li>
+            {(died !== ""? <li>{died}</li>:"")}
+            <li>{culture}</li>
+        </ul>
+    )
 }
