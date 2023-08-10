@@ -8,7 +8,6 @@ export default class RandomChar extends Component{
 
     constructor() {
         super();
-        this.updateChar();
     }
 
     gotService = new gotService()
@@ -18,6 +17,17 @@ export default class RandomChar extends Component{
         error: false,
     }
 
+    componentDidMount() {
+        console.log('mounting')
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 1500)
+    }
+
+    componentWillUnmount() {
+        console.log('unmounting')
+        clearInterval(this.timerId)
+    }
+
     onCharLoaded = (char) =>{
         this.setState({char})
         this.setState({
@@ -25,13 +35,14 @@ export default class RandomChar extends Component{
         })
     }
 
-    updateChar(){
+    updateChar =() =>{
         const id = Math.floor(Math.random()*140 + 25);
         this.gotService.getCurrCharacters(id)
             .then(this.onCharLoaded)
+            .catch(this.onError)
     }
 
-    onError = (error) =>{
+    onError = () =>{
         this.setState({
             error: true,
             loading: false
@@ -51,12 +62,15 @@ export default class RandomChar extends Component{
         const spinner = loading ? <Spinner/> : null
         const content = !(loading || error) ? <View char={char}/> : null
 
+
         return(
-            <RandomCharContainer>
-                {errorMessage}
-                {spinner}
-                {content}
-            </RandomCharContainer>
+            <>
+                <RandomCharContainer>
+                    {errorMessage}
+                    {spinner}
+                    {content}
+                </RandomCharContainer>
+            </>
         )
 
     }

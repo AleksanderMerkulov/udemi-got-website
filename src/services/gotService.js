@@ -32,8 +32,9 @@ export default class dotService{
      * Получить всех персонажей
      * @returns {Promise<*>}
      */
-    getAllCharacters(){
-        return this.get(`/characters`)
+    async getAllCharacters(){
+        const characters = await this.get(`/characters?page=2`)
+        return characters.map(char=>this._transformChar(char))
     }
 
     /**
