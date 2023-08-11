@@ -1,15 +1,14 @@
 import './App.css';
 import Header from "./components/header/header";
 import RandomChar from "./components/randomChar/randomChar";
+import CharacterSelectorPage from "./components/characterSelectorPage/characterSelectorPage";
 import {Component} from "react";
-import ItemList from "./components/itemList/itemList";
 
 
 export default class App extends Component{
 
     state={
         renderRandomChar: true,
-        // selectedChar: null,
     }
 
     rerenderRandom = () =>{
@@ -19,11 +18,7 @@ export default class App extends Component{
         })
     }
 
-    // onCharSelected = (id) =>{
-    //     this.setState({
-    //         selectedChar: id,
-    //     })
-    // }
+
 
     render(){
 
@@ -34,7 +29,7 @@ export default class App extends Component{
                 <Header></Header>
                 {randomChar}
                 <button onClick={this.rerenderRandom}>toggle character</button>
-                {/*<ItemList onCharSelected={this.onCharSelected} />*/}
+                <CharacterSelectorPage/>
             </div>
         );
     }

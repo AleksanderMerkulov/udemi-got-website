@@ -20,11 +20,15 @@ export default class ItemList extends Component{
     }
 
     renderItems(arr){
+
+        const firstID = 11
+
         return arr.map((item, i)=>{
             return(
                 <li
                     key={`charItem${i}`}
-                    onClick={this.props.onCharSelected(i)}>
+                    onClick={()=>{this.props.onCharSelected(firstID + i)}}
+                >
                     {item.name}
                 </li>
             )
