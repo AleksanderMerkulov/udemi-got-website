@@ -29,8 +29,13 @@ export default class CharDetails extends Component{
         }
     }
 
-    updateChar(){
+    // componentDidCatch(error, errorInfo) {
+    //     this.setState({
+    //         error: true,
+    //     })
+    // }
 
+    updateChar(){
         this.gotService.getCurrCharacters(this.props.id)
             .then((charItem)=>{
                 console.log(charItem)
@@ -42,14 +47,14 @@ export default class CharDetails extends Component{
     }
 
     render() {
-
-        if(!this.state.char && !this.state.loading){
+        if(!this.state.char){
             return <span>Не выбран персонаж</span>
         }
         //
         if(this.state.loading){
             return <Spinner/>
         }
+
 
         // const noSelectedChar = !this.state.char ? <span>Не выбран персонаж</span> : null
         // const spinner = this.state.loading ? <Spinner/> : null
@@ -78,34 +83,44 @@ export default class CharDetails extends Component{
             list-style: none;
           }
         `
+        const {name, gender, born, died, culture} = this.state.char
 
         return(
             <CharDetails>
                 {/*{noSelectedChar}*/}
                 {/*{spinner}*/}
-                <CharInfoDetail char={this.state.char}/>
+                {/*<CharInfoDetail char={this.state.char}/>*/}
+                <ul>
+                    <li className={"random-char__title"}>Карточка персонажа</li>
+                    <li>{name}</li>
+                    <li>{gender}</li>
+                    <li>{born}</li>
+                    <li>{died}</li>
+                    <li>{culture}</li>
+                </ul>
             </CharDetails>
         )
     }
 }
 
 
-const CharInfoDetail = ({char}) =>{
-
-    if(!char){
-        return null
-    }
-
-    const {name, gender, born, died, culture} = char
-
-    return(
-        <ul>
-            <li className={"random-char__title"}>Карточка персонажа</li>
-            <li>{name}</li>
-            <li>{gender}</li>
-            <li>{born}</li>
-            <li>{died}</li>
-            <li>{culture}</li>
-        </ul>
-    )
-}
+// const CharInfoDetail = ({char}) =>{
+//
+//     if(!char){
+//         return null
+//     }
+//
+//     const {name, gender, born, died, culture} = char
+//
+//
+//     return(
+//         <ul>
+//             <li className={"random-char__title"}>Карточка персонажа</li>
+//             <li>{name}</li>
+//             <li>{gender}</li>
+//             <li>{born}</li>
+//             <li>{died}</li>
+//             <li>{culture}</li>
+//         </ul>
+//     )
+// }

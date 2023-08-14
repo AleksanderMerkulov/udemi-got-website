@@ -3,11 +3,13 @@ import ItemList from "../itemList/itemList";
 import CharDetails from '../charDetails/charDetails'
 
 import styled from "styled-components";
+import ErrorMessage from "../errorMessage/errorMessage";
 
 export default class CharacterSelectorPage extends Component{
 
     state = {
         selectedChar: null,
+        error: false,
     }
 
     onCharSelected = (id) =>{
@@ -17,12 +19,23 @@ export default class CharacterSelectorPage extends Component{
         })
     }
 
+    componentDidCatch(error, errorInfo) {
+        console.log("Error", error)
+        this.setState({
+            error: true,
+        })
+    }
+
     render(){
 
         const CharSelectorContainer = styled.div`
           display: flex;
           margin-top: 10px;
         `
+
+        if(this.state.error){
+            return <ErrorMessage/>
+        }
 
         return(
             <CharSelectorContainer>
