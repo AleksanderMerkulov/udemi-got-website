@@ -33,7 +33,7 @@ export default class dotService{
      * @returns {Promise<*>}
      */
     async getAllCharacters(){
-        const characters = await this.get(`/characters?page=2`)
+        const characters = await this.get(`/characters?page=3`)
         return characters.map(char=>this._transformChar(char))
     }
 

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import gotService from '../../services/gotService'
 import Spinner from "../spinner/spinner";
+import styled from "styled-components";
 
 export default class CharDetails extends Component{
 
@@ -20,14 +21,15 @@ export default class CharDetails extends Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.id !== prevProps.id){
+            this.setState({
+                loading: true,
+            })
+
             this.updateChar()
         }
     }
 
     updateChar(){
-        this.setState({
-            loading: true,
-        })
 
         this.gotService.getCurrCharacters(this.props.id)
             .then((charItem)=>{
@@ -41,26 +43,69 @@ export default class CharDetails extends Component{
 
     render() {
 
-        if(!this.state.char){
+        if(!this.state.char && !this.state.loading){
             return <span>Не выбран персонаж</span>
         }
+        //
+        if(this.state.loading){
+            return <Spinner/>
+        }
 
-        // if(this.state.loading){
-        //     return <Spinner/>
-        // }
+        // const noSelectedChar = !this.state.char ? <span>Не выбран персонаж</span> : null
+        // const spinner = this.state.loading ? <Spinner/> : null
 
-        const {name, gender, born, died, culture} = this.state.char
+        const CharDetails = styled.div`
+          width: 15%;
+          min-height: 100px;
+          border-radius: 8px;
+          border: 1px solid #E0E0E0;
+          background: #FFF;
+          box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+          margin-top: 10px;
+          margin-left: 10px;
+          padding: 14px;
+
+          & .random-char__title {
+            color: #463118;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+
+          li {
+            list-style: none;
+          }
+        `
 
         return(
-            <div className={"charDetails"}>
-                <ul>
-                    <li>{name}</li>
-                    <li>{gender}</li>
-                    <li>{born}</li>
-                    {(died !== ""? <li>{died}</li>:"")}
-                    <li>{culture}</li>
-                </ul>
-            </div>
+            <CharDetails>
+                {/*{noSelectedChar}*/}
+                {/*{spinner}*/}
+                <CharInfoDetail char={this.state.char}/>
+            </CharDetails>
         )
     }
+}
+
+
+const CharInfoDetail = ({char}) =>{
+
+    if(!char){
+        return null
+    }
+
+    const {name, gender, born, died, culture} = char
+
+    return(
+        <ul>
+            <li className={"random-char__title"}>Карточка персонажа</li>
+            <li>{name}</li>
+            <li>{gender}</li>
+            <li>{born}</li>
+            <li>{died}</li>
+            <li>{culture}</li>
+        </ul>
+    )
 }

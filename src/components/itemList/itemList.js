@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import gotService from '../../services/gotService';
 import Spinner from "../spinner/spinner";
+import styled from "styled-components";
+import './itemList.css'
 
 
 export default class ItemList extends Component{
@@ -21,16 +23,25 @@ export default class ItemList extends Component{
 
     renderItems(arr){
 
-        const firstID = 11
+        const firstID = 21
+
+        const Li = styled.li`
+          border: 1px solid #463118;
+        `
+
 
         return arr.map((item, i)=>{
+
+            const selectedClass = (this.props.selectedCharId === (firstID + i)) ? "selected" : null
+
             return(
-                <li
+                <Li
+                    className={selectedClass}
                     key={`charItem${i}`}
                     onClick={()=>{this.props.onCharSelected(firstID + i)}}
                 >
                     {item.name}
-                </li>
+                </Li>
             )
         })
     }

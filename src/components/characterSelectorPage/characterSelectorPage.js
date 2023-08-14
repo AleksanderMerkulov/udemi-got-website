@@ -21,19 +21,13 @@ export default class CharacterSelectorPage extends Component{
 
         const CharSelectorContainer = styled.div`
           display: flex;
-          & .charDetails{
-            margin-left: 10px;
-          }
-
-          & .charDetails li{
-            list-style: none;
-          }
+          margin-top: 10px;
         `
 
         return(
             <CharSelectorContainer>
-                <ItemList onCharSelected={this.onCharSelected} />
-                <CharDetails id={this.state.selectedChar}/>
+                <ItemList className={"item-list"} onCharSelected={this.onCharSelected} selectedCharId={this.state.selectedChar} />
+                <CharDetails className={"char-details"} id={this.state.selectedChar}/>
             </CharSelectorContainer>
         )
     }

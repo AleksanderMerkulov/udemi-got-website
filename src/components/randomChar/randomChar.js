@@ -53,9 +53,28 @@ export default class RandomChar extends Component{
         const {char, loading, error} = this.state
 
         const RandomCharContainer = styled.div`
-          width: 25%;
-          min-height: 200px;
-          border: 1px solid black;
+          width: 15%;
+          min-height: 150px;
+          border-radius: 8px;
+          border: 1px solid #E0E0E0;
+          background: #FFF;
+          box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+          margin-top: 10px;
+          padding: 14px;
+          overflow: hidden;
+          
+          & .random-char__title{
+            color: #463118;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+          
+          li{
+            list-style: none;
+          }
         `
 
         const errorMessage = error ? <ErrorMessage/> : null
@@ -81,6 +100,7 @@ const View = ({char}) => {
 
     return(
         <ul>
+            <li className={"random-char__title"}>Карточка персонажа</li>
             <li>{name}</li>
             <li>{gender}</li>
             <li>{born}</li>

@@ -93,7 +93,7 @@
     overflow: hidden;
     background: none;
     margin: 0 auto;
-
+    transform: scale(0.5) translateY(-60px);
 }
 .ldio-rjrdemdlpbk {
     width: 100%;
