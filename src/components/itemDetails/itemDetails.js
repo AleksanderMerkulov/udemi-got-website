@@ -3,29 +3,39 @@ import gotService from '../../services/gotService'
 import Spinner from "../spinner/spinner";
 import styled from "styled-components";
 
-export default class CharDetails extends Component{
+const Field = ({item, field, label}) => {
+    return(
+        <li>{`${label}: ${item[field]}`}</li>
+    )
+}
+export {
+    Field
+}
+
+
+export default class ItemDetails extends Component{
 
     state = {
-        char: null,
+        item: null,
         loading: false,
         error: false,
     }
 
-    gotService = new gotService()
+    // gotService = new gotService()
 
     componentDidMount() {
-        if(this.props.id){
-            this.updateChar()
+        if(this.props.selectedItemId){
+            this.updateItem()
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.id !== prevProps.id){
+        if(this.props.selectedItemId !== prevProps.selectedItemId){
             this.setState({
                 loading: true,
             })
 
-            this.updateChar()
+            this.updateItem()
         }
     }
 
@@ -35,31 +45,34 @@ export default class CharDetails extends Component{
     //     })
     // }
 
-    updateChar(){
-        this.gotService.getCurrCharacters(this.props.id)
-            .then((charItem)=>{
-                console.log(charItem)
+    updateItem(){
+
+        // const {renderDetailFunc} = this.props
+
+        this.props.renderDetailFunc(this.props.selectedItemId)
+            .then((updatedItem)=>{
+                console.log(updatedItem)
                 this.setState({
-                    char:charItem,
+                    item:updatedItem,
                     loading: false,
                 })
             })
     }
 
     render() {
-        if(!this.state.char){
+        if(!this.state.item){
             return <span>Не выбран персонаж</span>
         }
         //
-        if(this.state.loading){
-            return <Spinner/>
-        }
+        // if(this.state.loading){
+        //     return <Spinner/>
+        // }
 
 
         // const noSelectedChar = !this.state.char ? <span>Не выбран персонаж</span> : null
         // const spinner = this.state.loading ? <Spinner/> : null
 
-        const CharDetails = styled.div`
+        const ItemDetails = styled.div`
           width: 15%;
           min-height: 100px;
           border-radius: 8px;
@@ -83,44 +96,23 @@ export default class CharDetails extends Component{
             list-style: none;
           }
         `
-        const {name, gender, born, died, culture} = this.state.char
+        const {item} = this.state
+        // const {name, gender, born, died, culture} = char
 
         return(
-            <CharDetails>
+            <ItemDetails>
                 {/*{noSelectedChar}*/}
                 {/*{spinner}*/}
                 {/*<CharInfoDetail char={this.state.char}/>*/}
                 <ul>
                     <li className={"random-char__title"}>Карточка персонажа</li>
-                    <li>{name}</li>
-                    <li>{gender}</li>
-                    <li>{born}</li>
-                    <li>{died}</li>
-                    <li>{culture}</li>
+                    {
+                        React.Children.map(this.props.children, (child)=>{
+                            return React.cloneElement(child, {item})
+                        })
+                    }
                 </ul>
-            </CharDetails>
+            </ItemDetails>
         )
     }
 }
-
-
-// const CharInfoDetail = ({char}) =>{
-//
-//     if(!char){
-//         return null
-//     }
-//
-//     const {name, gender, born, died, culture} = char
-//
-//
-//     return(
-//         <ul>
-//             <li className={"random-char__title"}>Карточка персонажа</li>
-//             <li>{name}</li>
-//             <li>{gender}</li>
-//             <li>{born}</li>
-//             <li>{died}</li>
-//             <li>{culture}</li>
-//         </ul>
-//     )
-// }

@@ -1,6 +1,8 @@
 export default class dotService{
     constructor() {
         this._apiUrl = "https://anapioficeandfire.com/api"
+        this.getAllCharacters = this.getAllCharacters.bind(this)
+        this.getCurrCharacters = this.getCurrCharacters.bind(this)
     }
 
     /**

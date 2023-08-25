@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import gotService from '../../services/gotService';
 import Spinner from "../spinner/spinner";
 import styled from "styled-components";
 import './itemList.css'
@@ -7,16 +6,15 @@ import './itemList.css'
 
 export default class ItemList extends Component{
 
-    gotService = new gotService()
     state = {
-        charList: null,
+        itemList: null,
     }
 
     componentDidMount() {
-        this.gotService.getAllCharacters()
-            .then((charList)=>{
+        this.props.renderFunc()
+            .then((itemList)=>{
                 this.setState({
-                    charList
+                    itemList
                 })
             })
     }
@@ -31,29 +29,31 @@ export default class ItemList extends Component{
 
 
         return arr.map((item, i)=>{
+            const selectedClass = (this.props.selectedItemId === (firstID + i)) ? "selected" : null
 
-            const selectedClass = (this.props.selectedCharId === (firstID + i)) ? "selected" : null
+            //Создание заголовка
+            let label = this.props.title(item.name, item.gender)
 
             return(
                 <Li
                     className={selectedClass}
                     key={`charItem${i}`}
-                    onClick={()=>{this.props.onCharSelected(firstID + i)}}
+                    onClick={()=>{this.props.onItemSelected(firstID + i)}}
                 >
-                    {item.name}
+                    {label}
                 </Li>
             )
         })
     }
 
     render(){
-        const {charList} = this.state
+        const {itemList} = this.state
 
-        if(!charList){
+        if(!itemList){
             return <Spinner/>
         }
 
-        const items = this.renderItems(charList)
+        const items = this.renderItems(itemList)
 
         return(
             <ul>
