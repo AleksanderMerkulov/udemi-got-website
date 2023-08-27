@@ -32,7 +32,7 @@ export default class ItemList extends Component{
             const selectedClass = (this.props.selectedItemId === (firstID + i)) ? "selected" : null
 
             //Создание заголовка
-            let label = this.props.title(item.name, item.gender)
+            let label = this.props.title(item.name)
 
             return(
                 <Li

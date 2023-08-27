@@ -41,7 +41,8 @@ export default class RowBlock extends Component{
                               onItemSelected={this.onItemSelected}
                     />
                     <ItemDetails selectedItemId = {this.state.selectedItemId}
-                                 renderDetailFunc={this.props.renderDetailFunc}   >
+                                 renderDetailFunc={this.props.renderDetailFunc}
+                    >
                         <Field label={"name"} field={"name"} />
                         <Field label={"gender"} field={"gender"} />
                     </ItemDetails>

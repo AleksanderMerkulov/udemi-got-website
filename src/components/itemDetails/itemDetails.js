@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import gotService from '../../services/gotService'
 import Spinner from "../spinner/spinner";
 import styled from "styled-components";
 
@@ -63,10 +62,10 @@ export default class ItemDetails extends Component{
         if(!this.state.item){
             return <span>Не выбран персонаж</span>
         }
-        //
-        // if(this.state.loading){
-        //     return <Spinner/>
-        // }
+
+        if(this.state.loading){
+            return <Spinner/>
+        }
 
 
         // const noSelectedChar = !this.state.char ? <span>Не выбран персонаж</span> : null

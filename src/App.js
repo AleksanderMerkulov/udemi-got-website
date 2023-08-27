@@ -1,10 +1,10 @@
 import './App.css';
 import Header from "./components/header/header";
 import RandomChar from "./components/randomChar/randomChar";
-import CharacterSelectorPage from "./components/characterSelectorPage/characterSelectorPage";
-import RowBlock from "./components/rowBlock/rowBlock";
+import CharacterSelectorPage from "./components/pages/characterSelectorPage/characterSelectorPage";
 import {Component} from "react";
-import GotService from "./services/gotService";
+import HousesSelectorPage from "./components/pages/housesSelectorPage/housesSelectorPage";
+import BookSelectorPage from "./components/pages/bookSelectorPage/bookSelectorPage";
 
 
 export default class App extends Component{
@@ -12,7 +12,6 @@ export default class App extends Component{
     state={
         renderRandomChar: true,
     }
-    gotService = new GotService()
 
 
     rerenderRandom = () =>{
@@ -34,6 +33,8 @@ export default class App extends Component{
                 {randomChar}
                 <button onClick={this.rerenderRandom}>toggle character</button>
                 <CharacterSelectorPage/>
+                <HousesSelectorPage/>
+                <BookSelectorPage/>
 
             </div>
         );
