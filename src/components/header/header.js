@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 import styled from "styled-components";
 
@@ -11,7 +12,7 @@ const HeaderContainer = styled.header`
 `
 
 const ImgLogo = styled.img`
-  height: 100%;
+  height: 60px;
 `
 
 const NavLink = styled.a`
@@ -21,20 +22,25 @@ const NavLink = styled.a`
   margin-right: 20px;
   text-transform: uppercase;
   transition: 0.15s;
-  
-  &:hover{
+
+  &:hover {
     text-decoration: underline;
   }
 `
 
 const Header = () => {
-    return(
+    return (
         <HeaderContainer>
-            <ImgLogo src="/logo.png" alt=""/>
+            <Link to={"/"}>
+                <ImgLogo src="/logo.png" alt=""/>
+            </Link>
             <nav>
-                <NavLink href="/">home</NavLink>
-                <NavLink href="/">character</NavLink>
-                <NavLink href="/">books</NavLink>
+                {/*<NavLink href="/">home</NavLink>*/}
+                {/*<NavLink href="/">character</NavLink>*/}
+                {/*<NavLink href="/">books</NavLink>*/}
+                <Link to={"/houses/"}>houses</Link>
+                <Link to={"/characters/"}>character</Link>
+                <Link to={"/books/"}>books</Link>
             </nav>
         </HeaderContainer>
     )
